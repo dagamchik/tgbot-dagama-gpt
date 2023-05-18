@@ -17,18 +17,18 @@ bot.use(session())
 
 bot.command('new', async(ctx) => {
     ctx.session = INITIAL_SESSION
-    await ctx.reply('Жду вашего голосового или текстового сообщения')
+    await ctx.reply('Отправь мне голосовое, либо напиши текстом')
 })
 bot.command('start', async(ctx) => {
     ctx.session = INITIAL_SESSION
-    await ctx.reply('Жду вашего голосового или текстового сообщения')
+    await ctx.reply('Отправь мне голосовое, либо напиши текстом')
 })
 
 bot.on(message('voice'), async ctx => {
     ctx.session ??= INITIAL_SESSION
     try {
         // await ctx.reply(JSON.stringify(ctx.message.voice, null, 2))
-        await ctx.reply(code('Сообщение принял. Жду ответ от сервера...'))
+        await ctx.reply(code('Я тебя понял, сейчас думаю...'))
         const link = await ctx.telegram.getFileLink(ctx.message.voice.file_id)
         const userId = String(ctx.message.from.id)
         const oggPath = await ogg.create(link.href, userId)
