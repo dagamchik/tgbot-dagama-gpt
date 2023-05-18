@@ -28,7 +28,7 @@ bot.on(message('voice'), async ctx => {
     ctx.session ??= INITIAL_SESSION
     try {
         // await ctx.reply(JSON.stringify(ctx.message.voice, null, 2))
-        await ctx.reply(code('Я тебя понял, сейчас думаю...'))
+        await ctx.reply(code('Я тебя понял, сейчас подумаю как ответить...'))
         const link = await ctx.telegram.getFileLink(ctx.message.voice.file_id)
         const userId = String(ctx.message.from.id)
         const oggPath = await ogg.create(link.href, userId)
@@ -53,7 +53,7 @@ bot.on(message('text'), async ctx => {
     ctx.session ??= INITIAL_SESSION
     try {
         // await ctx.reply(JSON.stringify(ctx.message.voice, null, 2))
-        await ctx.reply(code('Сообщение принял. Жду ответ от сервера...'))
+        await ctx.reply(code('Я тебя понял, сейчас подумаю как ответить...'))
 
         ctx.session.messages.push({ role: openai.roles.USER, content: ctx.message.text })
 
