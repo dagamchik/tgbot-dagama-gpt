@@ -38,13 +38,16 @@ bot.on(message('voice'), async ctx => {
         await ctx.reply(code(`Ваш запрос: ${text}`))
 
         ctx.session.messages.push({ role: openai.roles.USER, content: text })
-
+        console.log('msgs:', ctx.session.messages)
         const reponse = await openai.chat(ctx.session.messages)
 
+
+        console.log('reponse:', reponse.content)
         ctx.session.messages.push({ role: openai.roles.ASSISTANT, content: reponse.content })
 
         await ctx.reply(reponse.content)
     } catch(e) {
+        await ctx.reply('Задайте другой вопрос, пожалуйста :)')
         console.log('Error voice message:', e.message)
     }
 })
@@ -57,13 +60,16 @@ bot.on(message('text'), async ctx => {
 
         ctx.session.messages.push({ role: openai.roles.USER, content: ctx.message.text })
 
+        console.log('msgs:', ctx.session.messages)
         const reponse = await openai.chat(ctx.session.messages)
 
+        console.log('reponse:', reponse.content)
         ctx.session.messages.push({ role: openai.roles.ASSISTANT, content: reponse.content })
 
         await ctx.reply(reponse.content)
     } catch(e) {
-        console.log('Error voice message:', e.message)
+        await ctx.reply('Задайте другой вопрос, пожалуйста :)')
+        console.log('Error TEXT message:', e.message)
     }
 })
 
