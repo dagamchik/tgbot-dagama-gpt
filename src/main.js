@@ -23,6 +23,11 @@ bot.command('start', async(ctx) => {
     ctx.session = INITIAL_SESSION
     await ctx.reply('Отправь мне голосовое, либо напиши текстом')
 })
+bot.command('restart', async(ctx) => {
+    INITIAL_SESSION.messages = [];
+    ctx.session = INITIAL_SESSION
+    await ctx.reply('Отправь мне голосовое, либо напиши текстом)')
+})
 
 bot.on(message('voice'), async ctx => {
     ctx.session ??= INITIAL_SESSION
@@ -47,7 +52,7 @@ bot.on(message('voice'), async ctx => {
 
         await ctx.reply(reponse.content)
     } catch(e) {
-        await ctx.reply('Задайте другой вопрос, пожалуйста :)')
+        await ctx.reply('Прости, я завис(( отправь пожалуйста /restart команду, чтобы я смог перезагрузиться')
         console.log('Error voice message:', e.message)
     }
 })
@@ -68,7 +73,7 @@ bot.on(message('text'), async ctx => {
 
         await ctx.reply(reponse.content)
     } catch(e) {
-        await ctx.reply('Задайте другой вопрос, пожалуйста :)')
+        await ctx.reply('Прости, я завис(( отправь пожалуйста /restart команду, чтобы я смог перезагрузиться')
         console.log('Error TEXT message:', e.message)
     }
 })
